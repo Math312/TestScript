@@ -1,0 +1,321 @@
+[
+  {
+    "id": 1,
+    "text": "",
+    "event_list": [
+      {
+        "event_type": "Conflict",
+        "trigger": {
+          "text": "打击",
+          "offset": [
+            3,
+            5
+          ]
+        },
+        "arguments": [
+          {
+            "role": "Location",
+            "text": "阿富汗境内",
+            "offset": [
+              5,
+              10
+            ]
+          },
+          {
+            "role": "Object",
+            "text": "本拉登",
+            "offset": [
+              14,
+              17
+            ]
+          },
+          {
+            "role": "Subject",
+            "text": "英国海军",
+            "offset": [
+              45,
+              49
+            ]
+          }
+        ]
+      },
+      {
+        "event_type": "Conflict",
+        "trigger": {
+          "text": "打击",
+          "offset": [
+            3,
+            5
+          ]
+        },
+        "arguments": [
+          {
+            "role": "Location",
+            "text": "阿富汗境内",
+            "offset": [
+              5,
+              10
+            ]
+          },
+          {
+            "role": "Object",
+            "text": "塔利班",
+            "offset": [
+              10,
+              13
+            ]
+          },
+          {
+            "role": "Subject",
+            "text": "英国海军",
+            "offset": [
+              45,
+              49
+            ]
+          }
+        ]
+      },
+      {
+        "event_type": "Deploy",
+        "trigger": {
+          "text": "部署",
+          "offset": [
+            102,
+            104
+          ]
+        },
+        "arguments": [
+          {
+            "role": "Militaryforce",
+            "text": "特拉法尔加号",
+            "offset": [
+              69,
+              75
+            ]
+          },
+          {
+            "role": "Subject",
+            "text": "英国",
+            "offset": [
+              76,
+              78
+            ]
+          },
+          {
+            "role": "Location",
+            "text": "地中海",
+            "offset": [
+              105,
+              108
+            ]
+          }
+        ]
+      },
+      {
+        "event_type": "Conflict",
+        "trigger": {
+          "text": "攻击",
+          "offset": [
+            248,
+            250
+          ]
+        },
+        "arguments": [
+          {
+            "role": "Location",
+            "text": "南斯拉夫境内",
+            "offset": [
+              250,
+              256
+            ]
+          },
+          {
+            "role": "Object",
+            "text": "南斯拉夫境内目标",
+            "offset": [
+              250,
+              258
+            ]
+          },
+          {
+            "role": "Subject",
+            "text": "英国海军",
+            "offset": [
+              209,
+              213
+            ]
+          },
+          {
+            "role": "Date",
+            "text": "1999年",
+            "offset": [
+              223,
+              228
+            ]
+          }
+        ]
+      },
+      {
+        "event_type": "Conflict",
+        "trigger": {
+          "text": "对抗",
+          "offset": [
+            297,
+            299
+          ]
+        },
+        "arguments": [
+          {
+            "role": "Location",
+            "text": "地中海",
+            "offset": [
+              293,
+              296
+            ]
+          },
+          {
+            "role": "Object",
+            "text": "前苏联",
+            "offset": [
+              283,
+              286
+            ]
+          },
+          {
+            "role": "Subject",
+            "text": "英国",
+            "offset": [
+              262,
+              264
+            ]
+          },
+          {
+            "role": "Date",
+            "text": "冷战时期",
+            "offset": [
+              278,
+              282
+            ]
+          }
+        ]
+      },
+      {
+        "event_type": "Conflict",
+        "trigger": {
+          "text": "对抗",
+          "offset": [
+            297,
+            299
+          ]
+        },
+        "arguments": [
+          {
+            "role": "Location",
+            "text": "北大西洋",
+            "offset": [
+              288,
+              292
+            ]
+          },
+          {
+            "role": "Object",
+            "text": "前苏联",
+            "offset": [
+              283,
+              286
+            ]
+          },
+          {
+            "role": "Subject",
+            "text": "英国",
+            "offset": [
+              262,
+              264
+            ]
+          },
+          {
+            "role": "Date",
+            "text": "冷战时期",
+            "offset": [
+              278,
+              282
+            ]
+          }
+        ]
+      }
+    ],
+    "coref_arguments": [
+      [
+        {
+          "text": "英国",
+          "offset": [
+            24,
+            26
+          ]
+        },
+        {
+          "text": "英国海军",
+          "offset": [
+            45,
+            49
+          ]
+        },
+        {
+          "text": "英国海军",
+          "offset": [
+            209,
+            213
+          ]
+        }
+      ],
+      [
+        {
+          "text": "英国",
+          "offset": [
+            76,
+            78
+          ]
+        },
+        {
+          "text": "英国",
+          "offset": [
+            262,
+            264
+          ]
+        }
+      ],
+      [
+        {
+          "text": "特拉法尔加号",
+          "offset": [
+            69,
+            75
+          ]
+        },
+        {
+          "text": "特拉法尔加号",
+          "offset": [
+            56,
+            62
+          ]
+        }
+      ],
+      [
+        {
+          "text": "地中海",
+          "offset": [
+            105,
+            108
+          ]
+        },
+        {
+          "text": "地中海",
+          "offset": [
+            293,
+            296
+          ]
+        }
+      ]
+    ]
+  }
+]

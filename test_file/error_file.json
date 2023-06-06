@@ -1,0 +1,621 @@
+[
+  {
+  "id": "1416",
+  "text": "美国海军海上系统司令部授予雷声导弹系统公司一项合同，交付Mk 698导弹测试系统。 该合同总价值3080万美元，雷声公司将提供改进型海麻雀、标准导弹的测试能力，以及升级工具、装填工具、维修工具、零件和技术支持。合同预计于2016年12月完成，其中86%的工作由雷声导弹系统公司完成，10%由澳大利亚完成，4%由荷兰完成。 改进型海麻雀是RIM-7导弹的改进型，可为舰艇提供战场自防卫能力，可对抗高速、高机动性反舰导弹，以及来自水面和低空的目标。导弹发射前无需任何准备工作，通过尾舵控制导弹姿态。 美海军已经在阿里・伯克级驱逐舰、提康德罗加级巡洋舰、航母、两栖攻击舰，以及部分澳大利亚、荷兰、希腊、加拿大、丹麦、土耳其、西班牙和挪威的水面舰艇上部署了改进型海麻雀防空导弹。 去年，雷声公司在美海军自防卫测试舰上测试了改进型海麻雀的作战能力。",
+  "event_list": [
+    {
+      "event_type": "Support",
+      "trigger": {
+        "text": "交付",
+        "offset": [
+          26,
+          28
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Object",
+          "text": "美国海军海上系统司令部",
+          "offset": [
+            0,
+            11
+          ]
+        },
+        {
+          "role": "Subject",
+          "text": "雷声导弹系统公司",
+          "offset": [
+            13,
+            21
+          ]
+        },
+        {
+          "role": "Materials",
+          "text": "Mk 698导弹测试系统",
+          "offset": [
+            28,
+            40
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "挪威的水面舰艇",
+          "offset": [
+            313,
+            320
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "西班牙",
+          "offset": [
+            309,
+            312
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "土耳其",
+          "offset": [
+            305,
+            308
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "丹麦",
+          "offset": [
+            302,
+            304
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "加拿大",
+          "offset": [
+            298,
+            301
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "希腊",
+          "offset": [
+            295,
+            297
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "荷兰",
+          "offset": [
+            292,
+            294
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "澳大利亚",
+          "offset": [
+            287,
+            291
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "两栖攻击舰",
+          "offset": [
+            277,
+            282
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "航母",
+          "offset": [
+            274,
+            276
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "提康德罗加级巡洋舰",
+          "offset": [
+            264,
+            273
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Deploy",
+      "trigger": {
+        "text": "部署",
+        "offset": [
+          321,
+          323
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Subject",
+          "text": "美海军",
+          "offset": [
+            248,
+            251
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "阿里・伯克级驱逐舰",
+          "offset": [
+            254,
+            263
+          ]
+        },
+        {
+          "role": "Militaryforce",
+          "text": "改进型海麻雀防空导弹",
+          "offset": [
+            324,
+            334
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "Experiment",
+      "trigger": {
+        "text": "测试",
+        "offset": [
+          354,
+          356
+        ]
+      },
+      "arguments": [
+        {
+          "role": "Date",
+          "text": "去年",
+          "offset": [
+            336,
+            338
+          ]
+        },
+        {
+          "role": "Subject",
+          "text": "雷声公司",
+          "offset": [
+            339,
+            343
+          ]
+        },
+        {
+          "role": "Location",
+          "text": "美海军自防卫测试舰",
+          "offset": [
+            344,
+            353
+          ]
+        },
+        {
+          "role": "Equipment",
+          "text": "改进型海麻雀",
+          "offset": [
+            357,
+            363
+          ]
+        }
+      ]
+    }
+  ],
+  "coref_arguments": [
+    [
+      {
+        "text": "雷声导弹系统公司",
+        "offset": [
+          13,
+          21
+        ]
+      },
+      {
+        "text": "雷声公司",
+        "offset": [
+          56,
+          60
+        ]
+      },
+      {
+        "text": "雷声导弹系统公司",
+        "offset": [
+          130,
+          138
+        ]
+      }
+    ],
+    [
+      {
+        "text": "改进型海麻雀",
+        "offset": [
+          63,
+          69
+        ]
+      },
+      {
+        "text": "改进型海麻雀",
+        "offset": [
+          161,
+          167
+        ]
+      },
+      {
+        "text": "导弹",
+        "offset": [
+          222,
+          224
+        ]
+      },
+      {
+        "text": "导弹",
+        "offset": [
+          242,
+          244
+        ]
+      },
+      {
+        "text": "改进型海麻雀防空导弹",
+        "offset": [
+          324,
+          334
+        ]
+      },
+      {
+        "text": "改进型海麻雀",
+        "offset": [
+          357,
+          363
+        ]
+      }
+    ],
+    [
+      {
+        "text": "澳大利亚",
+        "offset": [
+          145,
+          149
+        ]
+      },
+      {
+        "text": "澳大利亚",
+        "offset": [
+          287,
+          291
+        ]
+      }
+    ],
+    [
+      {
+        "text": "荷兰",
+        "offset": [
+          155,
+          157
+        ]
+      },
+      {
+        "text": "荷兰",
+        "offset": [
+          292,
+          294
+        ]
+      }
+    ]
+  ]
+}
+]

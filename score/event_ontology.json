@@ -1,0 +1,50 @@
+{
+  "Experiment": [
+    "Subject",
+    "Equipment",
+    "Date",
+    "Location"
+  ],
+  "Manoeuvre": [
+    "Subject",
+    "Area",
+    "Date",
+    "Content"
+  ],
+  "Deploy": [
+    "Subject",
+    "Militaryforce",
+    "Date",
+    "Location"
+  ],
+  "Support": [
+    "Subject",
+    "Object",
+    "Date",
+    "Materials"
+  ],
+  "Accident": [
+    "Subject",
+    "Result",
+    "Date",
+    "Location"
+  ],
+  "Exhibit": [
+    "Subject",
+    "Equipment",
+    "Date",
+    "Location"
+  ],
+  "Conflict": [
+    "Subject",
+    "Object",
+    "Date",
+    "Location"
+  ],
+  "Injure": [
+    "Subject",
+    "Quantity",
+    "Date",
+    "Location"
+  ]
+}
