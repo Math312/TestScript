@@ -119,11 +119,14 @@ def find_max_score_seq(score_table, pred_visited, truth_visited):
             truth_label = False
     stop_label = pred_label or truth_label
     if stop_label:
-        return 0
+        return 0, [[]]
     max_score = 0
     max_score_indexes = []
     '''
     选择未确定匹配项的truth 进行匹配
+    [a,b]
+    a为标注集index
+    b为测试集index
     '''
     for i1, score_arr in enumerate(score_table):
         if not truth_visited[i1]:
@@ -135,7 +138,14 @@ def find_max_score_seq(score_table, pred_visited, truth_visited):
                         max_score_indexes.append([i1, i2])
                     elif score == max_score:
                         max_score_indexes.append([i1, i2])
+    '''存储 后续选择序列的最大分数'''
     max_other_score = 0
+    '''存储 满足最大分数的 当前位置可以选择的序列'''
+    score_index = []
+    '''存储 满足最大分数的 后续位置可以选择的序列
+    index 与 score_index一一对应，表示当前位置选择score_index[index]时，其达到最大score，后续序列可以是max_other_score_index[index]
+    '''
+    max_other_score_index = []
     for indexes in max_score_indexes:
         temp_pred_visited = copy.deepcopy(pred_visited)
         temp_truth_visited = copy.deepcopy(truth_visited)
@@ -144,11 +154,56 @@ def find_max_score_seq(score_table, pred_visited, truth_visited):
         other_score, other_seq = find_max_score_seq(score_table, temp_pred_visited, temp_truth_visited)
         if other_score > max_other_score:
             max_other_score = other_score
-    return max_other_score + max_score
+            score_index.clear()
+            score_index.append(indexes)
+            max_other_score_index.clear()
+            max_other_score_index.append(other_seq)
+        elif other_score == max_other_score:
+            score_index.append(indexes)
+            max_other_score_index.append(other_seq)
+    result_indexes = []
+
+    '''
+    这里做了两次去重，第一次去重是当前位置选[a,b]，后续序列可能重复，对后序序列集合的去重
+    第二次去重是把当前序列与后序序列拼接后，可能出现重复，进行去重。
+    '''
+    for i, indexes in enumerate(score_index):
+        temp = max_other_score_index[i]
+
+        i1 = 0
+        for i2, v2 in enumerate(temp):
+            if len(v2) > 0:
+                temp[i2] = sorted(v2, key=lambda x: (x[0], x[1]))
+        i2 = 0
+        while i2 < len(temp):
+            temp[i1] = temp[i2]
+            while i2 < len(temp):
+                if temp[i2] == temp[i1]:
+                    i2 += 1
+                else:
+                    break
+            i1 += 1
+        max_other_score_index[i] = temp[:i1]
+        for temp2 in max_other_score_index[i]:
+            temp2.append(indexes)
+            temp2 = sorted(temp2, key=lambda x: (x[0], x[1]))
+            result_indexes.append(temp2)
+    i1_r = 0
+    i2_r = 0
+    while i2_r < len(result_indexes):
+        result_indexes[i1_r] = result_indexes[i2_r]
+        while i2_r < len(result_indexes):
+            if result_indexes[i2_r] == result_indexes[i1_r]:
+                i2_r += 1
+            else:
+                break
+        i1_r += 1
+    return max_other_score + max_score, result_indexes[:i1_r]
 
 
 def compare_documents_arguments(doc_id, pred_event_list, truth_event_list, ontology, coref_dict, arg_id_to_coref):
     sum_score = 0
+    document_truth_sequence = []
     for (pred_events, truth_events) in zip(pred_event_list, truth_event_list):
         score_arr = []
         for truth_event in truth_events:
@@ -158,16 +213,20 @@ def compare_documents_arguments(doc_id, pred_event_list, truth_event_list, ontol
                 score_once = compare_arguments(ontology, truth_event["event_type"], pred_event["arguments"],
                                                truth_event["arguments"], coref_dict, arg_id_to_coref)
                 temp_arr.append(score_once)
-                # if len(match_result) in index_map:
-                #     index_map.get(len(match_result)).append(index)
-                # else:
-                #     index_map[len(match_result)] = [index]
-            # heapq.heapify(temp_arr)
             score_arr.append(temp_arr)
-        sum_score += find_max_score_seq(score_arr, [False] * len(pred_events), [False] * len(truth_events))
+        seq_score, sequences = find_max_score_seq(score_arr, [False] * len(pred_events), [False] * len(truth_events))
+        truth_sequences = []
+        for sequence in sequences:
+            temp_sequence = []
+            for pair in sequence:
+                temp_sequence.append([truth_events[pair[0]]["index"], pred_events[pair[1]]["index"]])
+            truth_sequences.append(temp_sequence)
+
+        sum_score += seq_score
+        document_truth_sequence.append(truth_sequences)
         # sum_score += find_max_sum(score_arr)
-    return sum_score
-    logger.info("doc_id:{},max_score:{}".format(doc_id, sum_score))
+    return sum_score, document_truth_sequence
+    # logger.info("doc_id:{},max_score:{}".format(doc_id, sum_score))
 
 
 def build_virtual_coref_dict(pred_arguments_list, truth_argument_list, coref_arguments):
@@ -202,16 +261,26 @@ def build_virtual_coref_dict(pred_arguments_list, truth_argument_list, coref_arg
 
 
 def score(pred_file, truth_file, ontology):
-    with open(pred_file, "r", encoding="utf-8") as pred_fd, open(truth_file, "r", encoding="utf-8") as truth_fd:
+    with open(pred_file, "r", encoding="utf-8") as pred_fd, open(truth_file, "r", encoding="utf-8") as truth_fd, open(
+            "match_sequence.json", "w", encoding="utf-8") as sequence_writer:
         pred_content = json.load(pred_fd)
         truth_content = json.load(truth_fd)
         score_util.check_document_line(pred_content, truth_content)
         sum_pred_argument_count = 0
         sum_truth_argument_count = 0
         sum_correct_argument_count = 0
+        match_sequence_json = []
         for (pred_document, truth_document) in zip(pred_content, truth_content):
             pred_event_list = pred_document["event_list"]
             truth_event_list = truth_document["event_list"]
+            index = 0
+            for pred_event in pred_event_list:
+                pred_event["index"] = index
+                index += 1
+            index = 0
+            for truth_event in truth_event_list:
+                truth_event["index"] = index
+                index += 1
             truth_coref_arguments = truth_document["coref_arguments"]
             coref_dict, arg_id_to_coref = build_virtual_coref_dict(pred_event_list, truth_event_list,
                                                                    truth_coref_arguments)
@@ -222,10 +291,15 @@ def score(pred_file, truth_file, ontology):
             pred_inter_event_list, truth_inter_event_list = intersection(sorted_pred_event_list,
                                                                          sorted_truth_event_list,
                                                                          score_util.compare_trigger, True)
-            document_max_score = compare_documents_arguments(pred_document["id"], pred_inter_event_list,
-                                                             truth_inter_event_list, ontology,
-                                                             coref_dict,
-                                                             arg_id_to_coref)
+            document_max_score, document_truth_sequence = compare_documents_arguments(pred_document["id"],
+                                                                                      pred_inter_event_list,
+                                                                                      truth_inter_event_list, ontology,
+                                                                                      coref_dict,
+                                                                                      arg_id_to_coref)
+            match_sequence_json.append({
+                "id": pred_document["id"],
+                "match_sequences_data": document_truth_sequence
+            })
             pred_arguments_count = 0
             truth_arguments_count = 0
             for event in pred_event_list:
@@ -235,6 +309,7 @@ def score(pred_file, truth_file, ontology):
             sum_pred_argument_count += pred_arguments_count
             sum_truth_argument_count += truth_arguments_count
             sum_correct_argument_count += document_max_score
+        sequence_writer.write(json.dumps(match_sequence_json))
         p = score_util.get_p(sum_correct_argument_count, sum_pred_argument_count)
         r = score_util.get_r(sum_correct_argument_count, sum_truth_argument_count)
         f1 = score_util.get_f1(p, r)
@@ -245,7 +320,7 @@ if __name__ == '__main__':
     logger = logging.getLogger()
     formatter = logging.Formatter('%(asctime)s - %(funcName)s - %(lineno)s - %(levelname)s - %(message)s')
     logger.setLevel(logging.INFO)
-    fh = logging.FileHandler("scorer.log")
+    fh = logging.FileHandler("args_scorer.log")
     fh.setLevel(logging.INFO)
     ch = logging.StreamHandler()
     ch.setLevel(logging.INFO)
@@ -253,8 +328,6 @@ if __name__ == '__main__':
     ch.setFormatter(formatter)
     logger.addHandler(fh)
     logger.addHandler(ch)
-    # read_file("../test_file/pred_data.json", "../test_file/truth_data.json")
     event_ontology = score_util.read_event_ontology("event_ontology.json")
+    ## arg1:训练集结果 arg2:测试集结果
     score("../test_file/pred_data.json", "../test_file/truth_data.json", event_ontology)
-    # score("../test_file/error_file.json", "../test_file/error_file.json", event_ontology)
-    # score("../data/FNDEE_valid.json", "../data/FNDEE_valid.json", event_ontology)

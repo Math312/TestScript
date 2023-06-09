@@ -74,5 +74,5 @@ if __name__ == '__main__':
     ch.setFormatter(formatter)
     logger.addHandler(fh)
     logger.addHandler(ch)
-    # read_file("../test_file/pred_data.json", "../test_file/truth_data.json")
+    ## arg1:训练集结果 arg2:测试集结果
     score("../data/FNDEE_valid.json", "../data/FNDEE_valid.json")
