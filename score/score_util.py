@@ -93,10 +93,10 @@ def check_document_line(pred_content, truth_content):
     pred_id_set = set()
     truth_id_set = set()
     for pred_document in pred_content:
-        pred_id_set.add(pred_document["id"])
+        pred_id_set.add(int(pred_document["id"]))
     for truth_document in truth_content:
         truth_id_set.add(int(truth_document["id"]))
-    check_result = pred_id_set == truth_id_set
-    if not check_result:
+    check_result = pred_id_set.difference(truth_id_set)
+    if len(check_result) != 0:
         logging.error("documents in prediction file and truth file not match")
     return check_result

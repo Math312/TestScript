@@ -1,3 +1,4 @@
+import argparse
 import json
 
 import score_util
@@ -328,6 +329,17 @@ if __name__ == '__main__':
     ch.setFormatter(formatter)
     logger.addHandler(fh)
     logger.addHandler(ch)
-    event_ontology = score_util.read_event_ontology("event_ontology.json")
+    parser = argparse.ArgumentParser(description='Analyze the result of common item.')
+    parser.add_argument('--ontology_file', dest='ontology_file', required=True,
+                        help='The event ontology file. It has been given in the Folder \"score/event_ontology.json\"')
+    parser.add_argument('--pred_file', dest='pred_file', required=True,
+                        help='The name of prediction file. Note: the index of document need to be same as that in the '
+                             'truth file')
+    parser.add_argument('--truth_file', dest='truth_file', required=True,
+                        help='The name of truth file. Note: the index of document need to be same as that in the '
+                             'prediction file')
+
+    args = parser.parse_args()
+    event_ontology = score_util.read_event_ontology(args.ontology_file)
     ## arg1:训练集结果 arg2:测试集结果
-    score("../../result/dev_050.json", "../data/FNDEE_valid.json", event_ontology)
+    score(args.pred_file, args.truth_file, event_ontology)

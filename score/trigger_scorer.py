@@ -1,3 +1,4 @@
+import argparse
 import json
 
 import score_util
@@ -6,19 +7,6 @@ import logging
 
 # def statistic_document_trigger_data(pred_document, truth_document):
 
-
-def check_document_line(pred_content, truth_content):
-    pred_id_set = set()
-    truth_id_set = set()
-    for pred_document in pred_content:
-        pred_id_set.add(pred_document["id"])
-    for truth_document in truth_content:
-        truth_id_set.add(int(truth_document["id"]))
-    check_result = pred_id_set.difference(truth_id_set)
-    if len(check_result) != 0:
-        logging.error(check_result)
-        logging.error("documents in prediction file and truth file not match")
-    return check_result
 
 
 def intersection(sorted_pred_list, sorted_truth_list):
@@ -41,7 +29,7 @@ def score(pred_file, truth_file):
     with open(pred_file, "r", encoding="utf-8") as pred_fd, open(truth_file, "r", encoding="utf-8") as truth_fd:
         pred_content = json.load(pred_fd)
         truth_content = json.load(truth_fd)
-        check_document_line(pred_content, truth_content)
+        score_util.check_document_line(pred_content, truth_content)
         correct_pred_count_sum = 0
         pred_count_sum = 0
         truth_count_sum = 0
@@ -75,5 +63,14 @@ if __name__ == '__main__':
     ch.setFormatter(formatter)
     logger.addHandler(fh)
     logger.addHandler(ch)
+    parser = argparse.ArgumentParser(description='Analyze the result of trigger')
+    parser.add_argument('--pred_file', dest='pred_file', required=True,
+                        help='The name of prediction file. Note: the index of document need to be same as that in the '
+                             'truth file')
+    parser.add_argument('--truth_file', dest='truth_file', required=True,
+                        help='The name of truth file. Note: the index of document need to be same as that in the '
+                             'prediction file')
+
+    args = parser.parse_args()
     ## arg1:训练集结果 arg2:测试集结果
-    score("../../result/dev_050.json", "../data/FNDEE_valid.json")
+    score(args.pred_file, args.truth_file)
