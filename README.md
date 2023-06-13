@@ -16,19 +16,19 @@ score
 - args_scorer.py
 - coref_scorer.py
 - event_ontology.json
-data
+example
 - FNDEE_valid.json
 ```
 
 在项目目录运行trigger评测脚本如下：
 
 ```shell
-python .\score\trigger_scorer.py  --pred_file "./data/FNDEE_valid.json" --truth_file "./data/FNDEE_valid.json"
+python .\score\trigger_scorer.py  --pred_file "./example/FNDEE_valid.json" --truth_file "./example/FNDEE_valid.json"
 ```
 
 在项目目录运行普通论元评测脚本如下：
 ```shell
-python .\score\args_scorer.py --ontology_file ./score/event_ontology.json --pred_file "./data/FNDEE_valid.json" --truth_file "./data/FNDEE_valid.json" 
+python .\score\args_scorer.py --ontology_file ./score/event_ontology.json --pred_file "./example/FNDEE_valid.json" --truth_file "./example/FNDEE_valid.json" 
 ```
 
 注意，此时会在运行脚本的目录生成一个文件`match_sequence.json`用于记录最优匹配结果。
@@ -36,6 +36,5 @@ python .\score\args_scorer.py --ontology_file ./score/event_ontology.json --pred
 在项目目录运行交织论元脚本如下：
 
 ```shell
-python .\score\coref_scorer.py --ontology_file ./score/event_ontology.json --pred_file "./data/FNDEE_valid.json" --truth_file "./data/FNDEE_valid.json"  -
--match_sequence_file "./match_sequence.json"
+python .\score\coref_scorer.py --ontology_file ./score/event_ontology.json --pred_file "./example/FNDEE_valid.json" --truth_file "./example/FNDEE_valid.json"  --match_sequence_file "./match_sequence.json"
 ```

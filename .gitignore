@@ -3,6 +3,7 @@ analyze
 .idea
 test_file
 */match_sequence.json
+match_sequence.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
