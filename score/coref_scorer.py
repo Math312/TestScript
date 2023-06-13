@@ -125,7 +125,9 @@ def score_documents(pred_file, truth_file, match_sequence_file):
             pred_event_list = pred_document["event_list"]
             truth_event_list = truth_document["event_list"]
             truth_coref_arguments = truth_document["coref_arguments"]
-            all_match_sequences = get_all_match_sequence(match_sequence_result["match_sequences_data"], 0)
+            all_match_sequences = []
+            if len(match_sequence_result["match_sequences_data"]) > 0:
+                all_match_sequences = get_all_match_sequence(match_sequence_result["match_sequences_data"], 0)
             coref_dict, arg_id_to_dict = build_virtual_coref_dict(pred_event_list, truth_coref_arguments)
             coref_items, coref_statistic_map = extract_coref_item(pred_event_list, coref_dict, arg_id_to_dict)
             pred_coref_data_count = len(coref_items)
@@ -144,7 +146,7 @@ def score_documents(pred_file, truth_file, match_sequence_file):
                     sub_result = copy_coref_items[coref_item].difference(correct_pred_event_set)
                     if len(sub_result) != 0:
                         del copy_coref_items[coref_item]
-                for key in copy_coref_items.keys():
+                for key in list(copy_coref_items.keys()):
                     arguments = coref_statistic_map[key]
                     label = False
                     for argument in arguments:
@@ -182,4 +184,4 @@ if __name__ == '__main__':
     logger.addHandler(ch)
     event_ontology = score_util.read_event_ontology("event_ontology.json")
     ## arg1:训练集结果 arg2:测试集结果 arg3: args_scores.py会生成一个文件默认名字未match_sequence.json，就是该文件
-    score_documents("../test_file/pred_data.json", "../test_file/truth_data.json", "match_sequence.json")
+    score_documents("../../result/dev_050.json", "../data/FNDEE_valid.json", "match_sequence.json")

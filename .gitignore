@@ -2,6 +2,7 @@ data
 analyze
 .idea
 test_file
+./score/match_sequence.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

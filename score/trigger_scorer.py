@@ -13,9 +13,10 @@ def check_document_line(pred_content, truth_content):
     for pred_document in pred_content:
         pred_id_set.add(pred_document["id"])
     for truth_document in truth_content:
-        truth_id_set.add(truth_document["id"])
-    check_result = pred_id_set == truth_id_set
-    if not check_result:
+        truth_id_set.add(int(truth_document["id"]))
+    check_result = pred_id_set.difference(truth_id_set)
+    if len(check_result) != 0:
+        logging.error(check_result)
         logging.error("documents in prediction file and truth file not match")
     return check_result
 
@@ -66,7 +67,7 @@ if __name__ == '__main__':
     logger = logging.getLogger()
     formatter = logging.Formatter('%(asctime)s - %(funcName)s - %(lineno)s - %(levelname)s - %(message)s')
     logger.setLevel(logging.INFO)
-    fh = logging.FileHandler("scorer.log")
+    fh = logging.FileHandler("trigger_scorer.log")
     fh.setLevel(logging.INFO)
     ch = logging.StreamHandler()
     ch.setLevel(logging.INFO)
@@ -75,4 +76,4 @@ if __name__ == '__main__':
     logger.addHandler(fh)
     logger.addHandler(ch)
     ## arg1:训练集结果 arg2:测试集结果
-    score("../data/FNDEE_valid.json", "../data/FNDEE_valid.json")
+    score("../../result/dev_050.json", "../data/FNDEE_valid.json")

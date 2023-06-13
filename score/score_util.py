@@ -1,4 +1,5 @@
 import json
+import logging
 
 """
 :parameter pred_true_count 正确预测结果的数量
@@ -69,6 +70,11 @@ def get_argument_unique_id(argument):
     return argument["text"] + "[" + str(argument["offset"][0]) + "," + str(argument["offset"][1]) + "]"
 
 
+def get_trigger_unique_id(event_type, trigger):
+    return event_type + "_" + trigger["text"] + "[" + str(trigger["offset"][0]) + "," + str(
+        trigger["offset"][1]) + "]"
+
+
 def compare_num(num1, num2):
     if num1 > num2:
         return 1
@@ -83,14 +89,13 @@ def read_event_ontology(file):
         return event_ontology
 
 
-
 def check_document_line(pred_content, truth_content):
     pred_id_set = set()
     truth_id_set = set()
     for pred_document in pred_content:
         pred_id_set.add(pred_document["id"])
     for truth_document in truth_content:
-        truth_id_set.add(truth_document["id"])
+        truth_id_set.add(int(truth_document["id"]))
     check_result = pred_id_set == truth_id_set
     if not check_result:
         logging.error("documents in prediction file and truth file not match")

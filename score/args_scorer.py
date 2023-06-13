@@ -330,4 +330,4 @@ if __name__ == '__main__':
     logger.addHandler(ch)
     event_ontology = score_util.read_event_ontology("event_ontology.json")
     ## arg1:训练集结果 arg2:测试集结果
-    score("../test_file/pred_data.json", "../test_file/truth_data.json", event_ontology)
+    score("../../result/dev_050.json", "../data/FNDEE_valid.json", event_ontology)
