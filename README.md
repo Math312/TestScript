@@ -14,6 +14,7 @@
 score
 - trigger_scorer.py
 - args_scorer.py
+- args_scorer_v2.py
 - coref_scorer.py
 - event_ontology.json
 example
@@ -31,10 +32,30 @@ python .\score\trigger_scorer.py  --pred_file "./example/FNDEE_valid.json" --tru
 python .\score\args_scorer.py --ontology_file ./score/event_ontology.json --pred_file "./example/FNDEE_valid.json" --truth_file "./example/FNDEE_valid.json" 
 ```
 
-注意，此时会在运行脚本的目录生成一个文件`match_sequence.json`用于记录最优匹配结果。
+```shell
+python .\score\args_scorer_v2.py --ontology_file ./score/event_ontology.json --pred_file "./example/FNDEE_valid.json" --truth_file "./example/FNDEE_valid.json" 
+```
 
+注意:
+1. 此时会在运行脚本的目录生成一个文件`match_sequence.json`用于记录最优匹配结果。
+2. args_scorer_v2.py的计算速度较args_scorer.py更快，但无法得到所有的匹配结果。
 在项目目录运行交织论元脚本如下：
 
 ```shell
 python .\score\coref_scorer.py --ontology_file ./score/event_ontology.json --pred_file "./example/FNDEE_valid.json" --truth_file "./example/FNDEE_valid.json"  --match_sequence_file "./match_sequence.json"
 ```
+
+注意：
+1. 由于交织论元的计算需要计算出所有的最优匹配的可能性，因此无法避免要使用递归，请使用args_scorer.py生成的`match_sequence.json`会更加准确。
+
+## 更新日志
+
+1. trigger_scorer.py 提供
+    - 事件类型F1: 只考虑事件类型(event_type)的准确性
+    - 事件触发词F1: 只考虑事件类型(event_type)和触发词Text(trigger text)的准确性
+    - 事件触发词F1: 考虑事件类型(event_type)、触发词(trigger text、offset)的准确性
+2. args_trigger.py 提供
+   - 普通论元但不考虑触发词和事件类型的准确性的F1
+   - 普通论元(考虑触发词、事件类型、论元本身)的F1
+3. 由于在不考虑事件类型和触发词的情况下，会出现如下问题：
+   - 交织论元的计算会简化为某一个论元计算准确，因此甚至会比普通论元F1还高（根据竞赛评分标准文档可得），这里不再提供该功能。
