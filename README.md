@@ -39,6 +39,8 @@ python .\score\args_scorer_v2.py --ontology_file ./score/event_ontology.json --p
 注意:
 1. 此时会在运行脚本的目录生成一个文件`match_sequence.json`用于记录最优匹配结果。
 2. args_scorer_v2.py的计算速度较args_scorer.py更快，但无法得到所有的匹配结果。
+3. args_scorer_v2.py提供了`普通论元但不考虑触发词和事件类型的准确性的F1`，而args_scorer.py不提供
+
 在项目目录运行交织论元脚本如下：
 
 ```shell
